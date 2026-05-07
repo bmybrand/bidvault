@@ -68,6 +68,30 @@ const featured: FeaturedItem[] = [
     timer: '02h 04m 56s',
     bid: '$4,400',
   },
+  {
+    img: '/images/landing/landing-17.jpg',
+    title: 'Lorem ipsum dolor sit amet consectetur',
+    timer: '01h 32m 19s',
+    bid: '$3,980',
+  },
+  {
+    img: '/images/landing/landing-18.jpg',
+    title: 'Lorem ipsum dolor sit amet consectetur',
+    timer: '03h 18m 52s',
+    bid: '$5,120',
+  },
+  {
+    img: '/images/landing/landing-19.jpg',
+    title: 'Lorem ipsum dolor sit amet consectetur',
+    timer: '04h 12m 07s',
+    bid: '$2,760',
+  },
+  {
+    img: '/images/landing/landing-20.jpg',
+    title: 'Lorem ipsum dolor sit amet consectetur',
+    timer: '00h 58m 44s',
+    bid: '$6,450',
+  },
 ]
 
 const categories = [
@@ -556,6 +580,13 @@ function AuctionCard({
 export default function LandingPage() {
   const [heroIndex, setHeroIndex] = useState(0)
   const heroLen = heroSlides.length
+  const getFeaturedPerPage = () => {
+    if (window.innerWidth >= 1024) return 4
+    if (window.innerWidth >= 640) return 2
+    return 1
+  }
+  const [featuredPerPage, setFeaturedPerPage] = useState(getFeaturedPerPage)
+  const [featuredPage, setFeaturedPage] = useState(0)
 
   useEffect(() => {
     const id = window.setInterval(() => {
@@ -564,11 +595,27 @@ export default function LandingPage() {
     return () => window.clearInterval(id)
   }, [heroLen])
 
+  useEffect(() => {
+    const onResize = () => setFeaturedPerPage(getFeaturedPerPage())
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
   const goHero = (dir: -1 | 1) => {
     setHeroIndex((i) => (i + dir + heroLen) % heroLen)
   }
 
   const slide = heroSlides[heroIndex]
+  const featuredPages = Math.ceil(featured.length / featuredPerPage)
+  const featuredVisible = featured.slice(featuredPage * featuredPerPage, (featuredPage + 1) * featuredPerPage)
+
+  useEffect(() => {
+    setFeaturedPage((p) => Math.min(p, Math.max(featuredPages - 1, 0)))
+  }, [featuredPages])
+
+  const goFeatured = (dir: -1 | 1) => {
+    setFeaturedPage((p) => (p + dir + featuredPages) % featuredPages)
+  }
 
   const [sportTab, setSportTab] = useState<SportTab>('General')
   const sportsFiltered =
@@ -755,20 +802,37 @@ export default function LandingPage() {
       <section id="featured" className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <h2 className="text-center text-lg font-semibold tracking-wide text-white sm:text-xl">Featured Item</h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {featured.map((item) => (
+          {featuredVisible.map((item) => (
             <FeaturedItemCard key={item.img + item.timer} item={item} />
           ))}
         </div>
         <div className="mt-6 flex items-center justify-center gap-2 text-sm text-[#7f8899]">
-          <button type="button" aria-label="Previous featured items" className="text-vault-gold hover:text-vault-gold-hover">
+          <button
+            type="button"
+            onClick={() => goFeatured(-1)}
+            aria-label="Previous featured items"
+            className="text-vault-gold transition hover:text-vault-gold-hover"
+          >
             ←
           </button>
-          <span className="text-vault-gold">+</span>
-          <span className="text-vault-gold">+</span>
-          <span>+</span>
-          <span>+</span>
-          <span>+</span>
-          <button type="button" aria-label="Next featured items" className="text-white hover:text-zinc-300">
+          {Array.from({ length: featuredPages }, (_, i) => (
+            <button
+              key={`featured-dot-${i}`}
+              type="button"
+              onClick={() => setFeaturedPage(i)}
+              aria-label={`Go to featured page ${i + 1}`}
+              aria-current={featuredPage === i}
+              className={`h-1.5 rounded-full transition-all ${
+                featuredPage === i ? 'w-4 bg-vault-gold' : 'w-1.5 bg-zinc-500 hover:bg-zinc-300'
+              }`}
+            />
+          ))}
+          <button
+            type="button"
+            onClick={() => goFeatured(1)}
+            aria-label="Next featured items"
+            className="text-white transition hover:text-zinc-300"
+          >
             →
           </button>
         </div>
