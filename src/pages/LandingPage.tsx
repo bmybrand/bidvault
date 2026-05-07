@@ -309,36 +309,54 @@ const events = [
   },
 ]
 
-const fallbackImageSrc = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+const fallbackPalettes = [
+  { a: '#1f2a44', b: '#111827', c: '#d4af37' },
+  { a: '#1e3a5f', b: '#0f172a', c: '#f59e0b' },
+  { a: '#3a2a1f', b: '#111827', c: '#fbbf24' },
+  { a: '#2a1f3f', b: '#0b1220', c: '#eab308' },
+] as const
+
+function hashString(value: string) {
+  let hash = 0
+  for (let i = 0; i < value.length; i += 1) {
+    hash = (hash << 5) - hash + value.charCodeAt(i)
+    hash |= 0
+  }
+  return Math.abs(hash)
+}
+
+function buildFallbackImageSrc(seed: string) {
+  const palette = fallbackPalettes[hashString(seed) % fallbackPalettes.length]
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
     <defs>
       <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#1f2937" />
-        <stop offset="100%" stop-color="#111827" />
+        <stop offset="0%" stop-color="${palette.a}" />
+        <stop offset="100%" stop-color="${palette.b}" />
       </linearGradient>
+      <filter id="blur"><feGaussianBlur stdDeviation="40" /></filter>
     </defs>
     <rect width="100%" height="100%" fill="url(#bg)" />
-    <g fill="#d4af37" opacity="0.9">
-      <rect x="300" y="170" width="200" height="140" rx="14" />
-      <circle cx="350" cy="220" r="22" />
-      <path d="M310 280l55-40 45 32 30-20 50 28v18H310z" fill="#111827" opacity="0.75" />
-    </g>
-    <text x="50%" y="78%" dominant-baseline="middle" text-anchor="middle"
-      font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#f3f4f6">
-      Image unavailable
-    </text>
-  </svg>`,
-)}`
+    <circle cx="180" cy="140" r="120" fill="${palette.c}" opacity="0.35" filter="url(#blur)" />
+    <circle cx="620" cy="360" r="150" fill="${palette.c}" opacity="0.25" filter="url(#blur)" />
+    <rect x="210" y="150" width="380" height="220" rx="18" fill="${palette.c}" opacity="0.14" />
+    <rect x="250" y="190" width="120" height="110" rx="12" fill="${palette.c}" opacity="0.35" />
+    <rect x="390" y="205" width="170" height="18" rx="9" fill="#e5e7eb" opacity="0.6" />
+    <rect x="390" y="235" width="130" height="14" rx="7" fill="#e5e7eb" opacity="0.45" />
+    <rect x="390" y="265" width="95" height="14" rx="7" fill="#e5e7eb" opacity="0.35" />
+  </svg>`
+
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`
+}
 
 function SafeImage({ src, alt, className }: { src: string; alt: string; className?: string }) {
   const handleError = (event: SyntheticEvent<HTMLImageElement>) => {
     const image = event.currentTarget
     if (image.dataset.fallbackApplied === 'true') return
     image.dataset.fallbackApplied = 'true'
-    image.src = fallbackImageSrc
+    image.src = buildFallbackImageSrc(src)
   }
 
-  return <img src={src} alt={alt} className={className} onError={handleError} />
+  return <img src={src} alt={alt} className={className} onError={handleError} loading="lazy" decoding="async" />
 }
 
 function IconSearch(props: { className?: string }) {
