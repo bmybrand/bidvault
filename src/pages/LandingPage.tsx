@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { type SyntheticEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const heroSlides = [
@@ -309,6 +309,38 @@ const events = [
   },
 ]
 
+const fallbackImageSrc = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#1f2937" />
+        <stop offset="100%" stop-color="#111827" />
+      </linearGradient>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#bg)" />
+    <g fill="#d4af37" opacity="0.9">
+      <rect x="300" y="170" width="200" height="140" rx="14" />
+      <circle cx="350" cy="220" r="22" />
+      <path d="M310 280l55-40 45 32 30-20 50 28v18H310z" fill="#111827" opacity="0.75" />
+    </g>
+    <text x="50%" y="78%" dominant-baseline="middle" text-anchor="middle"
+      font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#f3f4f6">
+      Image unavailable
+    </text>
+  </svg>`,
+)}`
+
+function SafeImage({ src, alt, className }: { src: string; alt: string; className?: string }) {
+  const handleError = (event: SyntheticEvent<HTMLImageElement>) => {
+    const image = event.currentTarget
+    if (image.dataset.fallbackApplied === 'true') return
+    image.dataset.fallbackApplied = 'true'
+    image.src = fallbackImageSrc
+  }
+
+  return <img src={src} alt={alt} className={className} onError={handleError} />
+}
+
 function IconSearch(props: { className?: string }) {
   return (
     <svg className={props.className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
@@ -409,7 +441,7 @@ function FeaturedItemCard({ item }: { item: FeaturedItem }) {
   return (
     <article className="group overflow-hidden rounded-xl bg-gradient-to-b from-[#1c2534] via-[#182131] to-[#121a28] p-2.5 ring-1 ring-[#2a3446]">
       <div className="relative aspect-[5/4] overflow-hidden rounded-lg bg-[#2a3240]">
-        <img src={item.img} alt="" className="h-full w-full object-cover" />
+        <SafeImage src={item.img} alt="" className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/62 via-black/18 to-black/28" />
         <span className="absolute left-1/2 top-2.5 -translate-x-1/2 rounded-full bg-[#3b4452]/95 px-2.5 py-0.5 text-[10px] font-semibold text-[#edf2fb]">
           {item.timer}
@@ -464,7 +496,7 @@ function AuctionCard({
       className="group relative overflow-hidden rounded-xl bg-vault-surface ring-1 ring-white/5"
     >
       <div className="relative aspect-[4/3] overflow-hidden">
-        <img src={img} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+        <SafeImage src={img} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
         <div className="pointer-events-none absolute right-3 top-3 flex items-center gap-2 opacity-0 transition-opacity duration-300 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
           <span className="rounded-md bg-black/50 px-2 py-0.5 text-xs font-medium text-white backdrop-blur-sm">{tag}</span>
@@ -600,7 +632,7 @@ export default function LandingPage() {
                 i === heroIndex ? 'z-0 opacity-100' : 'z-0 opacity-0'
               }`}
             >
-              <img src={s.image} alt="" className="h-full w-full object-cover" />
+              <SafeImage src={s.image} alt="" className="h-full w-full object-cover" />
             </div>
           ))}
         </div>
@@ -685,7 +717,7 @@ export default function LandingPage() {
                 </a>
               </div>
               <div className="relative min-h-[220px] md:min-h-0">
-                <img src={promoLeft} alt="" className="h-full min-h-[220px] w-full object-cover md:absolute md:inset-0" />
+                <SafeImage src={promoLeft} alt="" className="h-full min-h-[220px] w-full object-cover md:absolute md:inset-0" />
               </div>
             </div>
           </div>
@@ -702,7 +734,7 @@ export default function LandingPage() {
                 </a>
               </div>
               <div className="relative order-1 min-h-[220px] md:order-2 md:min-h-0">
-                <img src={promoRight} alt="" className="h-full min-h-[220px] w-full object-cover md:absolute md:inset-0" />
+                <SafeImage src={promoRight} alt="" className="h-full min-h-[220px] w-full object-cover md:absolute md:inset-0" />
               </div>
             </div>
           </div>
@@ -737,7 +769,7 @@ export default function LandingPage() {
           {categories.map((c) => (
             <a key={c.label} href="#" className="group block">
               <div className="relative aspect-[16/9] overflow-hidden rounded-[26px] bg-[#172132] ring-1 ring-[#2d3748]">
-                <img src={c.img} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                <SafeImage src={c.img} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black/25" />
                 <span className="pointer-events-none absolute left-1/2 top-1/2 inline-flex -translate-x-1/2 -translate-y-1/2 items-center rounded-xl bg-white px-5 py-2 text-sm font-bold text-[#121826] opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100">
                   Explore
@@ -860,7 +892,7 @@ export default function LandingPage() {
               key={e.title}
               className="flex gap-4 rounded-xl bg-vault-surface p-4 ring-1 ring-white/10 transition hover:ring-vault-gold/30"
             >
-              <img src={e.img} alt="" className="h-24 w-24 shrink-0 rounded-lg object-cover" />
+              <SafeImage src={e.img} alt="" className="h-24 w-24 shrink-0 rounded-lg object-cover" />
               <div className="min-w-0 flex-1">
                 {e.live && (
                   <span className="inline-block rounded bg-vault-gold px-2 py-0.5 text-[10px] font-bold uppercase text-vault-bg">
