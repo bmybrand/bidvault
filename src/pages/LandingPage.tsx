@@ -4,37 +4,37 @@ import { Link } from 'react-router-dom'
 const heroSlides = [
   {
     image:
-      'https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=2000&q=80',
+      '/images/landing/landing-01.jpg',
     title: 'Discover Rare Collectibles, Antiques & Liquidation Deals',
     subtitle:
       'Curated auctions from trusted sellers. Bid live or buy now on art, sports memorabilia, vintage pieces, and one-of-a-kind finds.',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=2000&q=80',
+      '/images/landing/landing-02.jpg',
     title: 'Fine Art & Museum-Quality Pieces at Auction',
     subtitle:
       'Browse authenticated paintings, sculpture, and prints with detailed provenance and specialist support from bid to delivery.',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=2000&q=80',
+      '/images/landing/landing-03.jpg',
     title: 'Sports Memorabilia & Signed Collectibles',
     subtitle:
       'Jerseys, cards, and game-used gear from verified consigners. Real-time bidding with transparent lot histories.',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1549887534-1541e9326642?auto=format&fit=crop&w=2000&q=80',
+      '/images/landing/landing-04.jpg',
     title: 'Antiques, Estates & Liquidation Events',
     subtitle:
       'Estate sales and business liquidations in one place. Discover furniture, decor, and hidden gems before they are gone.',
   },
 ] as const
 const promoLeft =
-  'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=900&q=80'
+  '/images/landing/landing-05.jpg'
 const promoRight =
-  'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80'
+  '/images/landing/landing-06.jpg'
 
 type FeaturedItem = {
   img: string
@@ -45,25 +45,25 @@ type FeaturedItem = {
 
 const featured: FeaturedItem[] = [
   {
-    img: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80',
+    img: '/images/landing/landing-07.jpg',
     title: 'Lorem ipsum dolor sit amet consectetur',
     timer: '02h 04m 56s',
     bid: '$4,400',
   },
   {
-    img: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=600&q=80',
+    img: '/images/landing/landing-08.jpg',
     title: 'Lorem ipsum dolor sit amet consectetur',
     timer: '02h 04m 56s',
     bid: '$4,400',
   },
   {
-    img: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=600&q=80',
+    img: '/images/landing/landing-09.jpg',
     title: 'Lorem ipsum dolor sit amet consectetur',
     timer: '50m 45s',
     bid: '$4,400',
   },
   {
-    img: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80',
+    img: '/images/landing/landing-10.jpg',
     title: 'Lorem ipsum dolor sit amet consectetur',
     timer: '02h 04m 56s',
     bid: '$4,400',
@@ -73,19 +73,19 @@ const featured: FeaturedItem[] = [
 const categories = [
   {
     label: 'Sports Collectibles',
-    img: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=600&q=80',
+    img: '/images/landing/landing-11.jpg',
   },
   {
     label: 'Antiques & Vintage',
-    img: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80',
+    img: '/images/landing/landing-12.jpg',
   },
   {
     label: 'Electronics & Equipment',
-    img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80',
+    img: '/images/landing/landing-13.jpg',
   },
   {
     label: 'Furniture & Home Goods',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80',
+    img: '/images/landing/landing-14.jpg',
   },
 ]
 
@@ -129,112 +129,112 @@ type SportsAuctionItem = {
 const sportsAuctionItems: SportsAuctionItem[] = [
   {
     tab: "Men's Clothing",
-    img: 'https://images.unsplash.com/photo-1526304760382-35937d3f416c?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-15.jpg',
     live: true,
     countdown: '08h : 15m : 33s',
     bid: '$199.00',
   },
   {
     tab: "Men's Clothing",
-    img: 'https://images.unsplash.com/photo-1517649763962-0c62306601b7?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-16.jpg',
     live: false,
     countdown: '14h : 02m : 10s',
     bid: '$276.00',
   },
   {
     tab: "Men's Clothing",
-    img: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-17.jpg',
     live: true,
     countdown: '03h : 40m : 55s',
     bid: '$353.00',
   },
   {
     tab: "Men's Clothing",
-    img: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-18.jpg',
     live: false,
     countdown: '22h : 11m : 08s',
     bid: '$430.00',
   },
   {
     tab: "Women's Clothing",
-    img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-19.jpg',
     live: true,
     countdown: '06h : 50m : 21s',
     bid: '$188.00',
   },
   {
     tab: "Women's Clothing",
-    img: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-20.jpg',
     live: false,
     countdown: '11h : 33m : 44s',
     bid: '$245.50',
   },
   {
     tab: "Women's Clothing",
-    img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-21.jpg',
     live: false,
     countdown: '01d : 04h : 12m',
     bid: '$512.00',
   },
   {
     tab: "Women's Clothing",
-    img: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-22.jpg',
     live: true,
     countdown: '02h : 09m : 17s',
     bid: '$320.00',
   },
   {
     tab: 'Accessories',
-    img: 'https://images.unsplash.com/photo-1523170335258-fcd848942b52?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-23.jpg',
     live: false,
     countdown: '09h : 22m : 01s',
     bid: '$165.00',
   },
   {
     tab: 'Accessories',
-    img: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-24.jpg',
     live: true,
     countdown: '04h : 18m : 49s',
     bid: '$410.00',
   },
   {
     tab: 'Accessories',
-    img: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-25.jpg',
     live: false,
     countdown: '16h : 05m : 30s',
     bid: '$289.00',
   },
   {
     tab: 'Accessories',
-    img: 'https://images.unsplash.com/photo-1611926627411-42cf779a1dac?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-26.jpg',
     live: false,
     countdown: '20h : 44m : 12s',
     bid: '$95.00',
   },
   {
     tab: 'Footwear',
-    img: 'https://images.unsplash.com/photo-1542291026-7eec264c27b2?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-27.jpg',
     live: true,
     countdown: '01h : 27m : 58s',
     bid: '$340.00',
   },
   {
     tab: 'Footwear',
-    img: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-28.jpg',
     live: false,
     countdown: '07h : 12m : 03s',
     bid: '$228.00',
   },
   {
     tab: 'Footwear',
-    img: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-29.jpg',
     live: false,
     countdown: '18h : 56m : 41s',
     bid: '$177.00',
   },
   {
     tab: 'Footwear',
-    img: 'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&w=500&q=80',
+    img: '/images/landing/landing-30.jpg',
     live: true,
     countdown: '05h : 31m : 19s',
     bid: '$455.00',
@@ -266,42 +266,42 @@ const howSteps = [
 
 const events = [
   {
-    img: 'https://images.unsplash.com/photo-1540747913346-19b32f3d9b30?auto=format&fit=crop&w=200&q=80',
+    img: '/images/landing/landing-31.jpg',
     title: 'Vintage Sports Memorabilia Evening',
     date: 'May 12, 2026',
     time: '7:00 PM EST',
     live: true,
   },
   {
-    img: 'https://images.unsplash.com/photo-1513475382583-d06e58bcb0e0?auto=format&fit=crop&w=200&q=80',
+    img: '/images/landing/landing-32.jpg',
     title: 'Fine Art & Sculpture Auction',
     date: 'May 18, 2026',
     time: '6:30 PM EST',
     live: false,
   },
   {
-    img: 'https://images.unsplash.com/photo-1452860606241-08dff4a87b00?auto=format&fit=crop&w=200&q=80',
+    img: '/images/landing/landing-33.jpg',
     title: 'Luxury Watches Liquidation',
     date: 'May 22, 2026',
     time: '5:00 PM EST',
     live: true,
   },
   {
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=200&q=80',
+    img: '/images/landing/landing-34.jpg',
     title: 'Estate Jewelry & Antiques',
     date: 'May 28, 2026',
     time: '8:00 PM EST',
     live: false,
   },
   {
-    img: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=200&q=80',
+    img: '/images/landing/landing-35.jpg',
     title: "Men's Fashion Archive Sale",
     date: 'Jun 02, 2026',
     time: '4:00 PM EST',
     live: false,
   },
   {
-    img: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=200&q=80',
+    img: '/images/landing/landing-36.jpg',
     title: 'Sneakers & Streetwear Drop',
     date: 'Jun 08, 2026',
     time: '12:00 PM EST',
