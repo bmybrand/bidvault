@@ -442,15 +442,8 @@ function StepIcon({ type }: { type: string }) {
 
 function Logo() {
   return (
-    <a href="#" className="flex items-center gap-2 text-white">
-      <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-vault-gold text-vault-bg">
-        <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-          <path d="M12 2L4 7v10l8 5 8-5V7l-8-5zm0 2.18l6 3.75v7.14l-6 3.75-6-3.75V7.93l6-3.75zM11 10h2v5h-2v-5zm0-3h2v2h-2V7z" />
-        </svg>
-      </span>
-      <span className="text-lg font-bold tracking-tight">
-        Bid<span className="text-vault-gold">Vault</span>
-      </span>
+    <a href="#" className="inline-flex items-center">
+      <img src="/images/logo.png" alt="BidVault" className="h-10 w-auto sm:h-11" />
     </a>
   )
 }

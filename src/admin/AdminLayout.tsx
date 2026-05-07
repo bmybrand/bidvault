@@ -57,8 +57,8 @@ export function AdminLayout() {
         }`}
       >
         <div className="border-b border-[color:var(--color-admin-border)] px-5 py-6">
-          <Link to="/admin" className="block text-xl font-bold tracking-tight text-admin-gold">
-            BidVault
+          <Link to="/admin" className="inline-flex items-center">
+            <img src="/images/logo.png" alt="BidVault" className="h-10 w-auto" />
           </Link>
           <div className="mt-4 rounded-lg border border-[color:var(--color-admin-border)] bg-admin-card px-3 py-3">
             <p className="text-sm font-semibold text-white">BidVault Admin</p>
